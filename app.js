@@ -36,6 +36,8 @@ server.views({
 });
 
 server.register([
+	require('hapi-auth-cookie'),
+	require('./src/plugins/authentication'),
     require('./src/plugins/router')
 ], function (err) {
 

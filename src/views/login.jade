@@ -1,0 +1,11 @@
+extends layout/layout
+
+block content
+	h2 login
+	form(method='post' action='login')
+		p
+		input(type="text" name="username" value="" placeholder="username")
+		p
+		input(type="password" name="password" value="" placeholder="password")
+		p
+		input(type="submit" value="login")
