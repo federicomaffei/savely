@@ -80,7 +80,9 @@ exports.register = function(server, options, next) {
             });
 
             User.register(newUser, request.payload.password, function(err, user) {
+                console.log('test');
                 if (err) {
+                    console.log(err);
                     reply(err);
                     return;
                 }
