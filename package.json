@@ -4,6 +4,7 @@
   "description": "savvy saving platform",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon -e js,jade app.js",
     "test": "mocha"
   },
   "repository": {
