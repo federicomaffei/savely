@@ -1,10 +1,21 @@
 doctype html
 html(lang="eng")
-    head
-        link(rel='shortcut icon', href='/favicon.ico')
-        block title
-            title savely
-    body
-        h2 
-            a(href='/') savely
-        block content
+	head
+		link(rel='shortcut icon', href='/favicon.ico')
+		block title
+			title savely
+	body
+		h2 
+			a(href='/') savely
+		if user
+			span welcome, #{user.username}&nbsp;
+			a(href="/dashboard") start saving
+			span &nbsp;
+			a(href="/logout") logout
+
+		else
+			span please&nbsp;
+			a(href="/login") login
+			span &nbsp;or&nbsp;
+			a(href="/register") register
+		block content

@@ -5,10 +5,15 @@ exports.init = function(server) {
 		method: 'GET',
 		path: '/',
 		handler: function (request, reply) {
-			reply.view('index');
-		},
-		config: {
-			auth: false
-		}
+            if(request.state.session) {
+                reply.view('index', {user: request.state.session.user});
+            }
+            else {
+                reply.view('index');
+            }
+        },
+        config: {
+            auth: false
+        }
 	});
 };
