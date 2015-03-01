@@ -9,10 +9,10 @@ html(lang="eng")
 			a(href='/') savely
 		if user
 			span welcome, #{user.username}&nbsp;
-			a(href="/dashboard") start saving
 			span &nbsp;
 			a(href="/logout") logout
-
+			p
+			a(href="/dashboard") start saving
 		else
 			span please&nbsp;
 			a(href="/login") login
