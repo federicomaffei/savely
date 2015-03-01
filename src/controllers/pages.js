@@ -6,7 +6,7 @@ exports.init = function(server) {
 		path: '/',
 		handler: function (request, reply) {
             if(request.state.session) {
-                reply.view('index', {user: request.state.session.user});
+                reply.view('index', {username: request.state.session.username});
             }
             else {
                 reply.view('index');

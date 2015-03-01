@@ -13,6 +13,14 @@ exports.register = function(server, options, next) {
         ttl: 24* 60 * 60 * 1000
     });
 
+    server.auth.strategy('oauth', 'bell', {
+        provider: 'google',
+        password: process.env.HAPI_AUTH_SECRET,
+        clientId: process.env.GOOGLE_AUTH_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_AUTH_CLIENT_SECRET,
+        isSecure: false
+    });
+
     server.ext('onPostAuth', function(req, reply) {
         if(req.auth.isAuthenticated) {
             req.user = req.auth.credentials.user;
@@ -25,6 +33,18 @@ exports.register = function(server, options, next) {
         path: '/login',
         handler: function (request, reply) {
             reply.view('login');
+        }
+    });
+
+    server.route({
+        method: ['GET', 'POST'],
+        path: '/omnilogin',
+        config: {
+            auth: 'oauth',
+            handler: function loginHandler(request, reply) {
+                request.auth.session.set({ username: request.auth.credentials.profile.displayName });
+                return reply.redirect('/');
+            }
         }
     });
 
@@ -47,7 +67,7 @@ exports.register = function(server, options, next) {
                 }
 
                 if (user) {
-                    request.auth.session.set({ user: user });
+                    request.auth.session.set({ username: user.username });
                     return reply.redirect('/');
                 }
 

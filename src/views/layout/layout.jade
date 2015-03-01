@@ -7,8 +7,8 @@ html(lang="eng")
 	body
 		h2 
 			a(href='/') savely
-		if user
-			span welcome, #{user.username}&nbsp;
+		if username
+			span welcome, #{username}&nbsp;
 			span &nbsp;
 			a(href="/logout") logout
 			p
@@ -16,6 +16,8 @@ html(lang="eng")
 		else
 			span please&nbsp;
 			a(href="/login") login
+			span &nbsp;
+			a(href="/omnilogin") login with google
 			span &nbsp;or&nbsp;
 			a(href="/register") register
 		block content
