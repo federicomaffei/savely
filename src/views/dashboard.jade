@@ -1,0 +1,8 @@
+extends layout/layout
+block content
+    h2 Here are the details of your plan:
+    ul
+    each plan in plans
+        li starting point: #{plan.startingPoint}
+        li goal: #{plan.endGoal}
+        li type: #{plan.type}

@@ -1,0 +1,16 @@
+extends ../layout/layout
+
+block content
+    h2 Please enter:
+    form(method="post" action="/plans")
+        p
+            input(type="text" name="start" value="" placeholder="starting point")
+        p
+            input(type="text" name="goal" value="" placeholder="goal amount to reach")
+        p
+            select(name="type")
+                option(value="monthly" selected=true ) Monthly
+                option(value="annual") Annual
+                option(value="quarterly") Quarterly
+        p
+            input(type="submit" value="create plan!")

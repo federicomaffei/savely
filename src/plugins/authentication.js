@@ -10,7 +10,7 @@ exports.register = function(server, options, next) {
         cookie: 'session',
         redirectTo: '/login',
         isSecure: false,
-        ttl: 24* 60 * 60 * 1000
+        ttl: 24 * 60 * 60 * 1000
     });
 
     server.auth.strategy('oauth', 'bell', {
@@ -41,8 +41,8 @@ exports.register = function(server, options, next) {
         path: '/omnilogin',
         config: {
             auth: 'oauth',
-            handler: function loginHandler(request, reply) {
-                request.auth.session.set({ username: request.auth.credentials.profile.displayName });
+            handler: function (request, reply) {
+                request.auth.session.set({ user: request.auth.credentials.profile, username: request.auth.credentials.profile.displayName });
                 return reply.redirect('/');
             }
         }
@@ -56,6 +56,8 @@ exports.register = function(server, options, next) {
         }
     });
 
+
+
     server.route({
         method: 'POST',
         path: '/login',
@@ -67,7 +69,7 @@ exports.register = function(server, options, next) {
                 }
 
                 if (user) {
-                    request.auth.session.set({ username: user.username });
+                    request.auth.session.set({ user: user, username: user.username });
                     return reply.redirect('/');
                 }
 
@@ -98,7 +100,6 @@ exports.register = function(server, options, next) {
             });
 
             User.register(newUser, request.payload.password, function(err, user) {
-                console.log('test');
                 if (err) {
                     console.log(err);
                     reply(err);
