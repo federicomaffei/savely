@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports.compPresValue = function(starting, interest){
-    return starting*Math.pow(1 + interest, 3).toFixed(2);
+    return this.roundToTwo(starting*Math.pow(1 + interest, 3));
 };
 
 module.exports.compInterests = function(years, interest){
