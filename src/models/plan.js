@@ -1,16 +1,14 @@
 'use strict';
 
 var mongoose = require('../../database').mongoose;
-require('mongoose-currency').loadType(mongoose);
-var Currency = mongoose.Types.Currency;
 
 var planSchema = new mongoose.Schema({
     startingPoint: {
-        type: Currency,
+        type: Number,
         required: true
     },
     endGoal: {
-        type: Currency,
+        type: Number,
         required: true
     },
     creator: {

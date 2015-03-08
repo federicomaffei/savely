@@ -53,7 +53,7 @@ exports.init = function(server) {
         path: '/dashboard',
         handler: function (request, reply) {
             Plan.find({creator: request.user.email}, function(err, docs){
-                reply.view('dashboard', { username: request.state.session.username, plans: docs });
+                reply.view('dashboard', { username: request.state.session.username, startingPoint: docs[0].startingPoint.toFixed(2), endGoal: docs[0].endGoal.toFixed(2), type: docs[0].type });
             });
         },
         config: {
