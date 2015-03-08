@@ -1,6 +1,7 @@
 'use strict';
 
-var Plan = require('../models/plan').Plan;
+var Plan = require('../models/plan').Plan,
+    calculator = require('../../src/utilities/PMTCalculator');
 
 exports.init = function(server) {
 	server.route({
@@ -40,8 +41,14 @@ exports.init = function(server) {
                 creator: request.user.email,
                 type: request.payload.type
             });
-            plan.save();
-            reply.redirect('dashboard');
+            plan.save(function(err) {
+                if(err) {
+                    reply.view('error', { username: request.state.session.username, err: 'you already have a plan!' });
+                }
+                else {
+                    reply.redirect('dashboard');
+                }
+            });
         },
         config: {
             auth: 'session'
@@ -53,7 +60,11 @@ exports.init = function(server) {
         path: '/dashboard',
         handler: function (request, reply) {
             Plan.find({creator: request.user.email}, function(err, docs){
-                reply.view('dashboard', { username: request.state.session.username, startingPoint: docs[0].startingPoint.toFixed(2), endGoal: docs[0].endGoal.toFixed(2), type: docs[0].type });
+                reply.view('dashboard', {
+                    username: request.state.session.username,
+                    plans: docs,
+                    calculator: calculator
+                });
             });
         },
         config: {

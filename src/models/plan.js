@@ -13,7 +13,8 @@ var planSchema = new mongoose.Schema({
     },
     creator: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     type: {
         type: String,

@@ -17,9 +17,7 @@ module.exports.PMT = function(startingPoint, endGoal){
     var interestRate = 0.01;
     var compoundStartValue = this.compPresValue(startingPoint, interestRate);
     var compoundInterests = this.compInterests(yearsPeriod, interestRate);
-
     return this.roundToTwo((compoundStartValue + endGoal)/(compoundInterests + 1));
-
 };
 
 module.exports.roundToTwo = function(num) {

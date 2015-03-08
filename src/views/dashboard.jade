@@ -2,7 +2,9 @@ extends layout/layout
 block content
     h2 Here are the details of your plan:
     ul
-        li starting point: #{startingPoint}
-        li goal: #{endGoal}
-        li type: #{type}
-        li plan:
+    each plan in plans
+        li starting point: #{plan.startingPoint}
+        li goal: #{plan.endGoal}
+        li type: #{plan.type}
+        li plan: #{calculator.PMT(plan.startingPoint, plan.endGoal)}
+    span #{err}
